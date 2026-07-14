@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getParticipants, deleteParticipant, updatePaymentStatus, getUploadUrl } from '../services/api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Loader from '../components/Loader';
 import Toast from '../components/Toast';
 import type { Participant, ParticipantsResponse } from '../types';
@@ -14,6 +14,7 @@ interface Props {
 
 const Participants = ({ categoryFilter, paymentFilter, title = 'Participants' }: Props) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [data, setData] = useState<ParticipantsResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -46,6 +47,16 @@ const Participants = ({ categoryFilter, paymentFilter, title = 'Participants' }:
       setLoading(false);
     }
   };
+
+  // Sync props to state when route changes (fixes stale filter state on navigation)
+  useEffect(() => {
+    setFilterCategory(categoryFilter || '');
+    setFilterPayment(paymentFilter || '');
+    setFilterDistrict('');
+    setDateFrom('');
+    setDateTo('');
+    setSearch('');
+  }, [categoryFilter, paymentFilter, location.pathname]);
 
   useEffect(() => {
     fetchParticipants();

@@ -47,6 +47,11 @@ export const loginAdmin = async (username: string, password: string) => {
   return response.data;
 };
 
+export const forgotPassword = async (username: string, new_password: string, confirm_password: string) => {
+  const response = await api.post('/api/reset_password.php', { username, new_password, confirm_password });
+  return response.data;
+};
+
 export const getDashboardData = async () => {
   const response = await api.get('/api/dashboard.php');
   return response.data;
