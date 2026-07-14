@@ -1,8 +1,9 @@
-// pages/QRScanner.tsx
 import React, { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import QRCode from 'qrcode';
 
 const QRScanner: React.FC = () => {
+  const { t } = useTranslation();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
   const FORM_URL = 'https://forms.gle/e8UDGavfZJ8NHKwm7';
@@ -29,9 +30,9 @@ const QRScanner: React.FC = () => {
         
         {/* Left Side - QR Code */}
         <div className="text-center lg:text-center w-full lg:w-auto">
-          <h3 className="text-lg md:text-xl lg:text-2xl font-extrabold text-maroon">QR குறியீடு</h3>
+          <h3 className="text-lg md:text-xl lg:text-2xl font-extrabold text-maroon">{t('qr.qrCode')}</h3>
           <p className="text-gray-600 text-sm md:text-base font-medium mb-3 md:mb-4">
-            மொபைலில் ஸ்கேன் செய்து படிவத்தை நிரப்பவும்
+            {t('qr.scanText')}
           </p>
           <div className="flex justify-center">
             <div
@@ -55,7 +56,6 @@ const QRScanner: React.FC = () => {
               />
             </div>
           </div>
-          {/* Extra margin to push content down for alignment */}
           <div className="mt-4 lg:mt-8"></div>
         </div>
 
@@ -64,10 +64,8 @@ const QRScanner: React.FC = () => {
           
           <h4 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-maroon mb-2 md:mb-3">
             <i className="fas fa-feather-alt text-gold mr-2"></i>
-            இப்போதே உங்கள் இடத்தை உறுதி செய்யுங்கள்
+            {t('qr.secureYourSpot')}
           </h4>
-          
-        
 
           {/* Awards & Certificates Section */}
           <div className="bg-gradient-to-r from-[#FFF8F0] to-[#FFF0EC] rounded-2xl p-4 md:p-6 mb-6 border border-gold/20">
@@ -78,9 +76,9 @@ const QRScanner: React.FC = () => {
                   <i className="fas fa-award text-gold text-sm md:text-base"></i>
                 </div>
                 <div>
-                  <span className="font-bold text-maroon">பங்கேற்கும் மாணவர்களுக்கு:</span>
+                  <span className="font-bold text-maroon">{t('qr.studentAward')}</span>
                   <span className="text-gray-700 text-sm md:text-base">
-                    {' '}பதஞ்சலி உலக ரெக்கார்டு சான்றிதழ், பாராட்டுச் சான்றிதழ் மற்றும் இராஜேந்திர சோழன் ஷீல்டு வழங்கப்படும்.
+                    {' '}{t('qr.studentAwardText')}
                   </span>
                 </div>
               </div>
@@ -91,9 +89,9 @@ const QRScanner: React.FC = () => {
                   <i className="fas fa-crown text-gold text-sm md:text-base"></i>
                 </div>
                 <div>
-                  <span className="font-bold text-maroon">பங்கேற்கும் குருமார்களுக்கு:</span>
+                  <span className="font-bold text-maroon">{t('qr.guruAward')}</span>
                   <span className="text-gray-700 text-sm md:text-base">
-                    {' '}இராஜேந்திர சோழன் விருது வழங்கி கௌரவிக்கப்படும்.
+                    {' '}{t('qr.guruAwardText')}
                   </span>
                 </div>
               </div>
@@ -109,10 +107,10 @@ const QRScanner: React.FC = () => {
               className="btn-primary inline-flex items-center gap-3 bg-maroon text-white px-6 md:px-10 lg:px-12 py-3 md:py-4 rounded-full font-bold text-sm md:text-base lg:text-lg border-none cursor-pointer transition-all duration-300 shadow-lg hover:bg-gold hover:text-maroon hover:-translate-y-1 hover:shadow-gold/35"
             >
               <i className="fas fa-external-link-alt"></i>
-              ஒரு நபர் பதிவு கட்டணம்: ₹1,500  
+              {t('qr.registerFee')}
             </a>
             <p className="text-gray-500 text-xs md:text-sm mt-2">
-              1008 நபர்களுக்கு மட்டுமே – முன்பதிவு அவசியம்!
+              {t('qr.limitedSeats')}
             </p>
           </div>
           
