@@ -24,13 +24,27 @@ const StatsBar: React.FC = () => {
   ];
 
   return (
-    <div className="container-custom -mt-4 md:-mt-6 lg:-mt-8 relative z-10 px-3 md:px-4">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 lg:gap-5 max-w-[1200px] mx-auto">
-        {stats.map((stat, index) => (
-          <StatCard key={index} {...stat} />
-        ))}
+    <section id="details" className="scroll-mt-20 pt-6 md:pt-10 lg:pt-14">
+      <div className="container-custom px-3 md:px-4">
+        <div className="max-w-[1200px] mx-auto">
+          {/* Heading - "நிகழ்வு" in Dark Brown, "விவரங்கள்" in Golden Yellow */}
+          <div className="text-center mb-6 md:mb-8 lg:mb-10">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-extrabold tracking-wide">
+<span className="text-[#6C2E1F]">நிகழ்வு</span>
+              <span className="text-gold">விவரங்கள்</span>
+            </h2>
+            {/* Decorative line under heading */}
+            <div className="w-20 md:w-28 h-1 bg-gradient-to-r from-maroon-dark to-gold mx-auto mt-3 rounded-full"></div>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 lg:gap-5">
+            {stats.map((stat, index) => (
+              <StatCard key={index} {...stat} />
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -7,59 +7,100 @@ const QRScanner: React.FC = () => {
   
   const FORM_URL = 'https://forms.gle/e8UDGavfZJ8NHKwm7';
 
-useEffect(() => {
-  if (!canvasRef.current) return;
+  useEffect(() => {
+    if (!canvasRef.current) return;
 
-  QRCode.toCanvas(canvasRef.current, FORM_URL, {
-    width: 160,
-    margin: 2,
-    color: {
-      dark: "#6C2E1F",
-      light: "#FFFFFF",
-    },
-  }).catch(console.error);
-}, []);
+    QRCode.toCanvas(canvasRef.current, FORM_URL, {
+      width: 160,
+      margin: 2,
+      color: {
+        dark: "#6C2E1F",
+        light: "#FFFFFF",
+      },
+    }).catch(console.error);
+  }, []);
 
   return (
-<section
-  id="register"
-  className="bg-white py-8 md:py-12 lg:py-16 px-4 md:px-6"
->      <div className="max-w-[1100px] mx-auto flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-14 xl:gap-16">
-        <div className="text-center">
+    <section
+      id="register"
+      className="bg-white py-8 md:py-12 lg:py-16 px-4 md:px-6"
+    >
+      <div className="max-w-[1100px] mx-auto flex flex-col lg:flex-row items-start justify-center gap-8 lg:gap-14 xl:gap-16">
+        
+        {/* Left Side - QR Code */}
+        <div className="text-center lg:text-center w-full lg:w-auto">
           <h3 className="text-lg md:text-xl lg:text-2xl font-extrabold text-maroon">QR குறியீடு</h3>
           <p className="text-gray-600 text-sm md:text-base font-medium mb-3 md:mb-4">
             மொபைலில் ஸ்கேன் செய்து படிவத்தை நிரப்பவும்
           </p>
-<div
-  className="
-    inline-block
-    bg-white
-    p-3
-    rounded-2xl
-    border-[3px]
-    border-[#D4AF37]
-    shadow-[0_8px_30px_rgba(212,175,55,0.25)]
-    min-w-[80px]
-    min-h-[80px]
-  "
->            <canvas
-              ref={canvasRef}
-              width={160}
-              height={160}
-              className="block w-[120px] h-[120px] md:w-[140px] md:h-[140px] lg:w-[160px] lg:h-[160px] max-w-full rounded-lg"
-            />
+          <div className="flex justify-center">
+            <div
+              className="
+                inline-block
+                bg-white
+                p-3
+                rounded-2xl
+                border-[3px]
+                border-[#D4AF37]
+                shadow-[0_8px_30px_rgba(212,175,55,0.25)]
+                min-w-[80px]
+                min-h-[80px]
+              "
+            >
+              <canvas
+                ref={canvasRef}
+                width={160}
+                height={160}
+                className="block w-[120px] h-[120px] md:w-[140px] md:h-[140px] lg:w-[160px] lg:h-[160px] max-w-full rounded-lg"
+              />
+            </div>
           </div>
+          {/* Extra margin to push content down for alignment */}
+          <div className="mt-4 lg:mt-8"></div>
         </div>
+
+        {/* Right Side - Content */}
         <div className="flex-1 min-w-[280px] md:min-w-[300px] lg:min-w-[350px] text-center lg:text-left">
+          
           <h4 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-maroon mb-2 md:mb-3">
             <i className="fas fa-feather-alt text-gold mr-2"></i>
             இப்போதே உங்கள் இடத்தை உறுதி செய்யுங்கள்
           </h4>
-          <p className="text-gray-600 text-sm md:text-base font-medium mb-4 md:mb-6 leading-relaxed">
-            மேலே உள்ள QR குறியீட்டை ஸ்கேன் செய்யவும் அல்லது கீழே உள்ள பொத்தானை அழுத்தி
-            Google Form மூலம் நேரடியாகப் பதிவு செய்யலாம்.
-            பதிவுக் கட்டணத்தைச் செலுத்திய பின் சேர்க்கை உறுதி செய்யப்படும்.
-          </p>
+          
+        
+
+          {/* Awards & Certificates Section */}
+          <div className="bg-gradient-to-r from-[#FFF8F0] to-[#FFF0EC] rounded-2xl p-4 md:p-6 mb-6 border border-gold/20">
+            <div className="space-y-3">
+              {/* For Students */}
+              <div className="flex items-start gap-3">
+                <div className="bg-gold/20 rounded-full p-2 mt-0.5 flex-shrink-0">
+                  <i className="fas fa-award text-gold text-sm md:text-base"></i>
+                </div>
+                <div>
+                  <span className="font-bold text-maroon">பங்கேற்கும் மாணவர்களுக்கு:</span>
+                  <span className="text-gray-700 text-sm md:text-base">
+                    {' '}பதஞ்சலி உலக ரெக்கார்டு சான்றிதழ், பாராட்டுச் சான்றிதழ் மற்றும் இராஜேந்திர சோழன் ஷீல்டு வழங்கப்படும்.
+                  </span>
+                </div>
+              </div>
+
+              {/* For Gurus */}
+              <div className="flex items-start gap-3">
+                <div className="bg-gold/20 rounded-full p-2 mt-0.5 flex-shrink-0">
+                  <i className="fas fa-crown text-gold text-sm md:text-base"></i>
+                </div>
+                <div>
+                  <span className="font-bold text-maroon">பங்கேற்கும் குருமார்களுக்கு:</span>
+                  <span className="text-gray-700 text-sm md:text-base">
+                    {' '}இராஜேந்திர சோழன் விருது வழங்கி கௌரவிக்கப்படும்.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Register Button */}
           <div>
             <a
               href={FORM_URL}
@@ -68,9 +109,13 @@ useEffect(() => {
               className="btn-primary inline-flex items-center gap-3 bg-maroon text-white px-6 md:px-10 lg:px-12 py-3 md:py-4 rounded-full font-bold text-sm md:text-base lg:text-lg border-none cursor-pointer transition-all duration-300 shadow-lg hover:bg-gold hover:text-maroon hover:-translate-y-1 hover:shadow-gold/35"
             >
               <i className="fas fa-external-link-alt"></i>
-              ஆன்லைனில் பதிவு செய்க
+              ஒரு நபர் பதிவு கட்டணம்: ₹1,500  
             </a>
+            <p className="text-gray-500 text-xs md:text-sm mt-2">
+              1008 நபர்களுக்கு மட்டுமே – முன்பதிவு அவசியம்!
+            </p>
           </div>
+          
         </div>
       </div>
     </section>
