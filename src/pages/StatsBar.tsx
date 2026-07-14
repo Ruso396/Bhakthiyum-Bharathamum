@@ -8,10 +8,29 @@ interface StatCardProps {
 }
 
 const StatCard: React.FC<StatCardProps> = ({ icon, num, label }) => (
-  <div className="bg-white p-4 md:p-5 lg:p-6 rounded-2xl md:rounded-3xl text-center shadow-[0_12px_40px_rgba(108,46,31,0.10)] border-2 border-gold-light transition-all duration-300 hover:-translate-y-2 hover:border-gold">
-    <i className={`${icon} text-2xl md:text-3xl text-gold block mb-1 md:mb-2`} />
-    <span className="text-base md:text-lg lg:text-xl font-extrabold text-maroon block">{num}</span>
-    <span className="text-xs md:text-sm text-gray-600 font-semibold block mt-1">{label}</span>
+  <div
+    className="
+      bg-white
+      p-4 md:p-5 lg:p-6
+      rounded-2xl md:rounded-3xl
+      text-center
+      border-2
+      border-[#D4AF37]
+      shadow-[0_12px_40px_rgba(212,175,55,0.18)]
+      transition-all
+      duration-300
+      hover:-translate-y-2
+      hover:border-[#D4AF37]
+      hover:shadow-[0_18px_45px_rgba(212,175,55,0.35)]
+    "
+  >
+    <i className={`${icon} text-2xl md:text-3xl text-[#D4AF37] block mb-2`} />
+    <span className="text-base md:text-lg lg:text-xl font-extrabold text-maroon block">
+      {num}
+    </span>
+    <span className="text-xs md:text-sm text-gray-600 font-semibold block mt-1">
+      {label}
+    </span>
   </div>
 );
 

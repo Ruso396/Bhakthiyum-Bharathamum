@@ -49,17 +49,17 @@ const VideoSection: React.FC = () => {
           {/* Right Content */}
           <div className="text-center lg:text-left">
 
-            <span className="inline-flex items-center gap-2 bg-gold/15 text-gold border border-gold/30 rounded-full px-5 py-2 text-sm font-bold mb-5">
+            {/* <span className="inline-flex items-center gap-2 bg-gold/15 text-gold border border-gold/30 rounded-full px-5 py-2 text-sm font-bold mb-5">
               <i className="fas fa-video"></i>
               EVENT PREVIEW
-            </span>
+            </span> */}
 
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-maroon mb-5">
-              {t('video.title')}{" "}
-              <span className="text-gold">
-                {t('video.titleHighlight')}
-              </span>
-            </h3>
+           <h3 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight text-maroon mb-5">
+  {t('video.title')}{" "}
+  <span className="text-gold">
+    {t('video.titleHighlight')}
+  </span>
+</h3>
 
             <p className="text-gray-600 text-base leading-8 mb-8">
               {t('video.description')}

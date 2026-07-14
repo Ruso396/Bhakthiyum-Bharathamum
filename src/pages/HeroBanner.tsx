@@ -13,9 +13,7 @@ const HeroBanner: React.FC = () => {
         className="w-full h-full object-cover block opacity-60"
       />
       <div className="absolute inset-0 hero-gradient flex flex-col items-center justify-center text-center px-4 py-8">
-        <span className="inline-block bg-gold/20 backdrop-blur-custom border border-gold/60 px-4 md:px-8 py-1.5 md:py-2 rounded-full text-gold text-[10px] md:text-xs lg:text-sm font-bold tracking-wider uppercase mb-2 md:mb-4">
-          {t('hero.worldRecord')}
-        </span>
+      
         <h1 className="text-white font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-shadow leading-tight">
           {t('hero.title')}
         </h1>

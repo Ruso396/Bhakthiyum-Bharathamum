@@ -10,16 +10,20 @@
     "subtitle": "Grand Gathering of 1008 Bharatanatyam Artists"
   },
   "qr": {
-    "qrCode": "QR Code",
-    "scanText": "Scan on mobile to fill the form",
-    "secureYourSpot": "Secure Your Spot Now",
-    "studentAward": "Participating Students:",
-    "studentAwardText": "Patanjali World Record Certificate, Appreciation Certificate and Rajendra Cholan Shield will be awarded.",
-    "guruAward": "Participating Gurus:",
-    "guruAwardText": "Will be honored with Rajendra Cholan Award.",
-    "registerFee": "Registration Fee per person: ₹1,500",
-    "limitedSeats": "Only for 1008 people – Booking is mandatory!"
-  },
+  "qrCode": "QR Code",
+  "scanText": "Scan to fill the form",
+  "scanToRegister": "Scan QR to register",
+  "registrationLink": "Registration Link",
+  "secureYourSpot": "Secure Your Spot Now!",
+  "studentAward": "For Students:",
+  "studentAwardText": "Patanjali World Record Certificate, Appreciation Certificate and Rajendra Cholan Award will be presented.",
+  "guruAward": "For Families:",
+  "guruAwardText": "Rajendra Cholan Award will be presented and honored.",
+  "feeLabel": "Registration Fee:",
+  "registerFee": "₹1,500 per person",
+  "registerNow": "Register Now",
+  "limitedSeats": "Limited to 1008 people only - Booking is mandatory!"
+},
   "video": {
     "eventPreview": "Event Preview",
     "title": "Grand Gathering of 1008",
@@ -32,7 +36,7 @@
     "day": "Sunday",
     "time": "3:00 PM",
     "location": "Ariyalur",
-    "locationDetail": "Kokilambal Institutions",
+    "locationDetail": "Kokilambal Institutions, Ariyalur District, Tamil Nadu",
     "artists": "Dance Artists"
   },
   "perks": {

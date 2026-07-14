@@ -11,13 +11,28 @@ const Navbar: React.FC = () => {
     { label: t('nav.eventDetails'), href: '#details', icon: 'fas fa-info-circle' },
   ];
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+ const handleClick = (
+  e: React.MouseEvent<HTMLAnchorElement>,
+  href: string
+) => {
+  e.preventDefault();
+
+  const target = document.querySelector(href) as HTMLElement;
+
+  if (target) {
+    const headerHeight = 80; // உங்கள் header height
+
+    const elementPosition =
+      target.getBoundingClientRect().top + window.pageYOffset;
+
+    const offsetPosition = elementPosition - headerHeight;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    });
+  }
+};
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-cream/97 backdrop-blur-custom border-b-3 border-gold py-3 shadow-[0_4px_24px_rgba(108,46,31,0.08)]">
