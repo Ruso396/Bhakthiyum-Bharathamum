@@ -19,10 +19,12 @@ const AdminLayout = () => {
   if (loading) return <Loader />;
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex h-screen overflow-hidden bg-gray-50">
       <AdminSidebar />
-      <div className="ml-64 flex-1 p-6">
-        <Outlet />
+      <div className="ml-64 flex-1 min-w-0 overflow-y-auto pt-8">
+        <div className="p-6">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

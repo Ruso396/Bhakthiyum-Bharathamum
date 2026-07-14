@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Loader from '../components/Loader';
 import Toast from '../components/Toast';
 import type { Participant, ParticipantsResponse } from '../types';
+import { exportToExcel } from '../utils/exportToExcel';
 
 interface Props {
   categoryFilter?: string;
@@ -96,18 +97,50 @@ const Participants = ({ categoryFilter, paymentFilter, title = 'Participants' }:
   };
 
   return (
-    <div>
+    <div className="mt-6">
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
       
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-maroon-800">{title}</h1>
-        <p className="text-gray-500 text-sm">Manage participant registrations</p>
+      {/* Header with title and export button */}
+      <div className="mb-6 flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-maroon-800">{title}</h1>
+          <p className="text-gray-500 text-sm">Manage participant registrations</p>
+        </div>
+        <button
+          onClick={() => {
+            if (!data?.participants || data.participants.length === 0) return;
+            exportToExcel({
+              columns: [
+                { header: 'Reg No', key: 'registration_number' },
+                { header: 'Category', key: 'category' },
+                { header: 'Name', key: 'name' },
+                { header: 'Father Name', key: 'father_name' },
+                { header: 'Phone', key: 'phone' },
+                { header: 'District', key: 'district' },
+                { header: 'UPI ID', key: 'upi_id' },
+                { header: 'Payment Status', key: 'payment_status' },
+                { header: 'Date', key: 'created_at' },
+              ],
+              rows: data.participants.map((p) => ({
+                ...p,
+                created_at: new Date(p.created_at).toLocaleDateString(),
+              })),
+              filename: 'Participants.xlsx',
+            });
+          }}
+          className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 font-medium flex items-center gap-2 whitespace-nowrap"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Export Excel
+        </button>
       </div>
 
       {/* Filters */}
       <div className="bg-white rounded-xl shadow-sm p-4 mb-6 border border-gray-100">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-          <div className="flex gap-2">
+        <div className="flex flex-wrap gap-3 items-end">
+          <div className="flex gap-2 flex-1 min-w-[260px]">
             <input
               type="text"
               value={search}
@@ -117,7 +150,7 @@ const Participants = ({ categoryFilter, paymentFilter, title = 'Participants' }:
             />
             <button
               onClick={handleSearch}
-              className="px-4 py-2 bg-maroon-700 text-white rounded-lg text-sm hover:bg-maroon-800"
+              className="px-4 py-2 bg-maroon-700 text-white rounded-lg text-sm hover:bg-maroon-800 whitespace-nowrap"
             >
               Search
             </button>
@@ -126,7 +159,7 @@ const Participants = ({ categoryFilter, paymentFilter, title = 'Participants' }:
             <select
               value={filterCategory}
               onChange={(e) => setFilterCategory(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
+              className="px-3 py-2 border border-gray-300 rounded-lg text-sm min-w-[140px]"
             >
               <option value="">All Categories</option>
               <option value="Master">Master</option>
@@ -137,7 +170,7 @@ const Participants = ({ categoryFilter, paymentFilter, title = 'Participants' }:
             <select
               value={filterPayment}
               onChange={(e) => setFilterPayment(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
+              className="px-3 py-2 border border-gray-300 rounded-lg text-sm min-w-[140px]"
             >
               <option value="">All Payments</option>
               <option value="Pending">Pending</option>
@@ -148,7 +181,7 @@ const Participants = ({ categoryFilter, paymentFilter, title = 'Participants' }:
           <select
             value={filterDistrict}
             onChange={(e) => setFilterDistrict(e.target.value)}
-            className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
+            className="px-3 py-2 border border-gray-300 rounded-lg text-sm min-w-[140px]"
           >
             <option value="">All Districts</option>
             {data?.districts.map((d) => (
@@ -173,96 +206,94 @@ const Participants = ({ categoryFilter, paymentFilter, title = 'Participants' }:
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div className="overflow-x-auto">
-          {loading ? (
-            <Loader />
-          ) : (
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-gray-50 text-left">
-                  <th className="p-3 font-semibold text-gray-600">Reg No</th>
-                  <th className="p-3 font-semibold text-gray-600">Category</th>
-                  <th className="p-3 font-semibold text-gray-600">Name</th>
-                  <th className="p-3 font-semibold text-gray-600">Father Name</th>
-                  <th className="p-3 font-semibold text-gray-600">Phone</th>
-                  <th className="p-3 font-semibold text-gray-600">District</th>
-                  <th className="p-3 font-semibold text-gray-600">UPI ID</th>
-                  <th className="p-3 font-semibold text-gray-600">Screenshot</th>
-                  <th className="p-3 font-semibold text-gray-600">Status</th>
-                  <th className="p-3 font-semibold text-gray-600">Date</th>
-                  <th className="p-3 font-semibold text-gray-600">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data?.participants.map((p: Participant) => (
-                  <tr key={p.id} className="border-t border-gray-50 hover:bg-gray-50">
-                    <td className="p-3 font-medium text-maroon-700">{p.registration_number}</td>
-                    <td className="p-3">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        p.category === 'Master' ? 'bg-purple-100 text-purple-700' : 'bg-teal-100 text-teal-700'
-                      }`}>{p.category}</span>
-                    </td>
-                    <td className="p-3">{p.name}</td>
-                    <td className="p-3">{p.father_name}</td>
-                    <td className="p-3">{p.phone}</td>
-                    <td className="p-3">{p.district}</td>
-                    <td className="p-3 text-xs">{p.upi_id}</td>
-                    <td className="p-3">
-                      <a
-                        href={getUploadUrl(p.payment_screenshot)}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-maroon-600 hover:text-maroon-800 underline text-xs"
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
+        {loading ? (
+          <div className="p-8"><Loader /></div>
+        ) : (
+          <table className="w-full text-sm min-w-[1100px]">
+            <thead>
+              <tr className="bg-gray-50 text-left">
+                <th className="p-3 font-semibold text-gray-600">Reg No</th>
+                <th className="p-3 font-semibold text-gray-600">Category</th>
+                <th className="p-3 font-semibold text-gray-600">Name</th>
+                <th className="p-3 font-semibold text-gray-600">Father Name</th>
+                <th className="p-3 font-semibold text-gray-600">Phone</th>
+                <th className="p-3 font-semibold text-gray-600">District</th>
+                <th className="p-3 font-semibold text-gray-600">UPI ID</th>
+                <th className="p-3 font-semibold text-gray-600">Screenshot</th>
+                <th className="p-3 font-semibold text-gray-600">Status</th>
+                <th className="p-3 font-semibold text-gray-600">Date</th>
+                <th className="p-3 font-semibold text-gray-600">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data?.participants.map((p: Participant) => (
+                <tr key={p.id} className="border-t border-gray-50 hover:bg-gray-50">
+                  <td className="p-3 font-medium text-maroon-700 whitespace-nowrap">{p.registration_number}</td>
+                  <td className="p-3 whitespace-nowrap">
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      p.category === 'Master' ? 'bg-purple-100 text-purple-700' : 'bg-teal-100 text-teal-700'
+                    }`}>{p.category}</span>
+                  </td>
+                  <td className="p-3 whitespace-nowrap">{p.name}</td>
+                  <td className="p-3 whitespace-nowrap">{p.father_name}</td>
+                  <td className="p-3 whitespace-nowrap">{p.phone}</td>
+                  <td className="p-3 whitespace-nowrap">{p.district}</td>
+                  <td className="p-3 text-xs whitespace-nowrap">{p.upi_id}</td>
+                  <td className="p-3 whitespace-nowrap">
+                    <a
+                      href={getUploadUrl(p.payment_screenshot)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-maroon-600 hover:text-maroon-800 underline text-xs"
+                    >
+                      View
+                    </a>
+                  </td>
+                  <td className="p-3 whitespace-nowrap">{statusBadge(p.payment_status)}</td>
+                  <td className="p-3 text-xs whitespace-nowrap">{new Date(p.created_at).toLocaleDateString()}</td>
+                  <td className="p-3">
+                    <div className="flex gap-1 flex-nowrap">
+                      <button
+                        onClick={() => navigate(`/admin/participant/${p.id}`)}
+                        className="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200 whitespace-nowrap"
                       >
                         View
-                      </a>
-                    </td>
-                    <td className="p-3">{statusBadge(p.payment_status)}</td>
-                    <td className="p-3 text-xs">{new Date(p.created_at).toLocaleDateString()}</td>
-                    <td className="p-3">
-                      <div className="flex gap-1 flex-wrap">
+                      </button>
+                      {p.payment_status !== 'Approved' && (
                         <button
-                          onClick={() => navigate(`/admin/participant/${p.id}`)}
-                          className="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
+                          onClick={() => handlePaymentStatus(p.id, 'Approved')}
+                          className="px-2 py-1 text-xs bg-green-100 text-green-700 rounded hover:bg-green-200 whitespace-nowrap"
                         >
-                          View
+                          Approve
                         </button>
-                        {p.payment_status !== 'Approved' && (
-                          <button
-                            onClick={() => handlePaymentStatus(p.id, 'Approved')}
-                            className="px-2 py-1 text-xs bg-green-100 text-green-700 rounded hover:bg-green-200"
-                          >
-                            Approve
-                          </button>
-                        )}
-                        {p.payment_status !== 'Rejected' && (
-                          <button
-                            onClick={() => handlePaymentStatus(p.id, 'Rejected')}
-                            className="px-2 py-1 text-xs bg-red-100 text-red-700 rounded hover:bg-red-200"
-                          >
-                            Reject
-                          </button>
-                        )}
+                      )}
+                      {p.payment_status !== 'Rejected' && (
                         <button
-                          onClick={() => handleDelete(p.id)}
-                          className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200"
+                          onClick={() => handlePaymentStatus(p.id, 'Rejected')}
+                          className="px-2 py-1 text-xs bg-red-100 text-red-700 rounded hover:bg-red-200 whitespace-nowrap"
                         >
-                          Delete
+                          Reject
                         </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-                {(!data?.participants || data.participants.length === 0) && (
-                  <tr>
-                    <td colSpan={11} className="p-8 text-center text-gray-400">No participants found</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          )}
-        </div>
+                      )}
+                      <button
+                        onClick={() => handleDelete(p.id)}
+                        className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 whitespace-nowrap"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+              {(!data?.participants || data.participants.length === 0) && (
+                <tr>
+                  <td colSpan={11} className="p-8 text-center text-gray-400">No participants found</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

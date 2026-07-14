@@ -45,7 +45,7 @@ const ParticipantDetail = () => {
   if (!participant) return <div className="text-red-500 p-4">Participant not found</div>;
 
   return (
-    <div>
+    <div className="mt-6">
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
 
       <div className="mb-6 flex items-center justify-between">
