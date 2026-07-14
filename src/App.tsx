@@ -1,16 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-// Landing Page Components
-import Navbar from './component/Navbar';
-import Footer from './component/Footer';
-import HeroBanner from './pages/HeroBanner';
-import QRScanner from './pages/QRScanner';
-import VideoSection from './pages/AboutSection';
-import StatsBar from './pages/StatsBar';
-import Gallery from './pages/Gallery';
-import Details from './pages/Details';
-import Perks from './pages/Perks';
-import FeeBox from './pages/FeeBox';
+// Pages
+import Home from './pages/Home';
 
 // Admin Pages
 import Registration from './pages/Registration';
@@ -19,23 +10,6 @@ import AdminLayout from './layouts/AdminLayout';
 import Dashboard from './pages/Dashboard';
 import Participants from './pages/Participants';
 import ParticipantDetail from './pages/ParticipantDetail';
-
-const Home = () => {
-  return (
-    <div className="min-h-screen flex flex-col bg-cream font-inter text-[#1a1a1a] overflow-x-hidden w-full max-w-full">
-      <Navbar />
-      <HeroBanner />
-      <QRScanner />
-      <VideoSection />
-      <StatsBar />
-      <Gallery />
-      <Details />
-      <Perks />
-      <FeeBox />
-      <Footer />
-    </div>
-  );
-};
 
 const App = () => {
   return (
