@@ -4,7 +4,7 @@ import Toast from '../components/Toast';
 import type { FormErrors } from '../types';
 import qrCodeImage from '../assets/gpay-screenshot.jpg';
 import registerImage from '../assets/register.webp';
-import { User, MapPin, CreditCard, CheckCircle, ChevronRight, ChevronLeft, X, AlertCircle, Phone, Hash, Building2, Landmark, Wallet, Image, Sparkles, ArrowRight, PartyPopper, Trophy } from 'lucide-react';
+import { User, MapPin, CreditCard, CheckCircle, ChevronRight, ChevronLeft, X, AlertCircle, Phone, Hash, Building2, Landmark, Wallet, Image, Sparkles, PartyPopper, Trophy } from 'lucide-react';
 
 const indianStates = [
   'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh',
@@ -288,36 +288,25 @@ const Registration = () => {
 
             {step === 3 && (
               <div className="space-y-5 animate-[fadeSlideIn_0.3s_ease-out]">
-                <div className="relative group">
-                  <div className="absolute -inset-0.5 bg-gradient-to-br from-maroon-500/20 to-amber-500/20 rounded-2xl blur opacity-50 group-hover:opacity-70 transition duration-300" />
-                  <div className="relative bg-gradient-to-br from-maroon-50 to-amber-50/50 backdrop-blur-sm rounded-2xl p-5 border border-maroon-100/50">
-                    <div className="text-center mb-3">
-                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-maroon-100 mb-2"><CreditCard className="w-6 h-6 text-maroon-600" /></div>
-                      <h3 className="text-lg font-bold text-maroon-800">Scan & Pay</h3>
-                      <p className="text-xs text-maroon-500 mt-1">Scan this QR code using any UPI app</p>
-                    </div>
-                    <div className="flex justify-center">
-                      <div className="bg-white rounded-2xl p-4 shadow-inner border border-maroon-100/50 max-w-[200px] w-full">
-                        <img src={qrCodeImage} alt="UPI QR Code for Payment" className="w-full h-auto rounded-xl" />
-                      </div>
-                    </div>
-                    <div className="mt-3 text-center">
-                      <p className="text-[10px] text-maroon-400 leading-relaxed">After payment, enter your UPI ID and upload the payment screenshot below</p>
-                    </div>
-                  </div>
-                </div>
                 <div className="relative">
                   <div className={iconWrap}><Wallet className="w-5 h-5" /></div>
                   <input type="text" name="upi_id" value={formData.upi_id} onChange={handleChange} placeholder="UPI ID (e.g. example@paytm)" className={inputClass('upi_id')} />
                   {errors.upi_id && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.upi_id}</p>}
                 </div>
                 <div>
+                  <p className="text-sm font-medium text-gray-700 mb-2">Scan QR Code to Pay</p>
+                  <div className="rounded-2xl border-2 border-gray-200 p-3 bg-white flex flex-col items-center">
+                    <img src={qrCodeImage} alt="Payment QR Code" className="max-h-56 w-auto rounded-lg object-contain" />
+                    <p className="text-xs text-gray-500 mt-2">Scan this QR code with any UPI app to complete the payment</p>
+                  </div>
+                </div>
+                <div>
                   <p className="text-sm font-medium text-gray-700 mb-2">Upload Payment Screenshot *</p>
-                  <div onClick={() => fileRef.current?.click()} className={`relative cursor-pointer rounded-2xl border-2 border-dashed p-6 transition-all duration-300 group ${preview ? 'border-green-300 bg-green-50/50' : errors.payment_screenshot ? 'border-red-300 bg-red-50/30' : 'border-gray-200 hover:border-maroon-300 hover:bg-maroon-50/30'}`}>
+                  <div onClick={() => fileRef.current?.click()} className={`relative cursor-pointer rounded-2xl border-2 border-dashed p-8 transition-all duration-300 group ${preview ? 'border-green-300 bg-green-50/50' : errors.payment_screenshot ? 'border-red-300 bg-red-50/30' : 'border-gray-200 hover:border-maroon-300 hover:bg-maroon-50/30'}`}>
                     {preview ? (
                       <div className="space-y-3">
                         <div className="relative inline-block mx-auto">
-                          <img src={preview} alt="Preview" className="max-h-36 mx-auto rounded-xl shadow-md object-cover" />
+                          <img src={preview} alt="Preview" className="max-h-48 mx-auto rounded-xl shadow-md object-cover" />
                           <button type="button" onClick={(e) => { e.stopPropagation(); removeScreenshot(); }} className="absolute -top-2 -right-2 w-7 h-7 bg-red-500 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-red-600 transition-colors"><X className="w-4 h-4" /></button>
                         </div>
                         <div className="flex items-center justify-center gap-2">
@@ -327,23 +316,14 @@ const Registration = () => {
                       </div>
                     ) : (
                       <div className="text-center">
-                        <div className="w-16 h-16 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-maroon-100 to-amber-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300"><Image className="w-7 h-7 text-maroon-500" /></div>
-                        <p className="text-gray-700 font-medium text-sm">Click to upload screenshot</p>
+                        <div className="w-20 h-20 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-maroon-100 to-amber-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300"><Image className="w-9 h-9 text-maroon-500" /></div>
+                        <p className="text-gray-700 font-medium text-base">Click to upload screenshot</p>
                         <p className="text-xs text-gray-400 mt-1">JPG, JPEG, PNG (Max 10MB)</p>
                       </div>
                     )}
                     <input ref={fileRef} type="file" accept=".jpg,.jpeg,.png" onChange={handleFileChange} className="hidden" />
                   </div>
                   {errors.payment_screenshot && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.payment_screenshot}</p>}
-                </div>
-                <div className="bg-gradient-to-br from-amber-50 to-maroon-50 rounded-xl p-4 border border-amber-100/50">
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0 mt-0.5"><ArrowRight className="w-4 h-4 text-amber-600" /></div>
-                    <div>
-                      <p className="text-xs font-semibold text-amber-800">Payment Instructions</p>
-                      <p className="text-xs text-amber-700/70 mt-1 leading-relaxed">1. Scan the QR code using any UPI app<br />2. Complete the payment<br />3. Enter your UPI ID above<br />4. Upload the payment screenshot</p>
-                    </div>
-                  </div>
                 </div>
               </div>
             )}
