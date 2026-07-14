@@ -3,9 +3,10 @@ import React from 'react';
 
 const navLinks = [
   { label: 'நிகழ்வு முன்னோட்டம்', href: '#video', icon: 'fas fa-video' },
-  { label: 'படத்தொகுப்பு தருணங்கள்', href: '#gallery', icon: 'fas fa-images' },
+    { label: 'பதிவு செய்க', href: '#register', icon: 'fas fa-pen-alt' },
+
+  // { label: 'படத்தொகுப்பு தருணங்கள்', href: '#gallery', icon: 'fas fa-images' },
   { label: 'நிகழ்வு விவரங்கள்', href: '#details', icon: 'fas fa-info-circle' },
-  { label: 'பதிவு செய்க', href: '#register', icon: 'fas fa-pen-alt' },
 ];
 
 const Navbar: React.FC = () => {

@@ -4,10 +4,10 @@ import HeroBanner from './HeroBanner';
 import QRScanner from './QRScanner';
 import VideoSection from './AboutSection';
 import StatsBar from './StatsBar';
-import Gallery from './Gallery';
-import Details from './Details';
+// import Gallery from './Gallery';
+// import Details from './Details';
 import Perks from './Perks';
-import FeeBox from './FeeBox';
+// import FeeBox from './FeeBox';
 
 const Home = () => {
   return (
@@ -15,11 +15,11 @@ const Home = () => {
       <Navbar />
       <HeroBanner />
       <QRScanner />
-      <FeeBox />
+      {/* <FeeBox /> */}
       <VideoSection />
       <StatsBar />
-      <Gallery />
-      <Details />
+      {/* <Gallery /> */}
+      {/* <Details /> */}
       <Perks />
       <Footer />
     </div>
