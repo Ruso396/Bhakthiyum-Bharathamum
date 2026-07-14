@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-cream/97 backdrop-blur-custom border-b-3 border-gold py-3 shadow-[0_4px_24px_rgba(108,46,31,0.08)]">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-cream/97 backdrop-blur-custom border-b-3 border-gold py-3 shadow-[0_4px_24px_rgba(108,46,31,0.08)]">
       <div className="container-custom flex items-center justify-center flex-wrap gap-1 md:gap-2 lg:gap-3">
         {navLinks.map((link, index) => (
           <a

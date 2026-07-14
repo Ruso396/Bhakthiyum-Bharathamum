@@ -11,7 +11,7 @@ import FeeBox from './FeeBox';
 
 const Home = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-cream font-inter text-[#1a1a1a] overflow-x-hidden w-full max-w-full">
+    <div className="min-h-screen flex flex-col bg-cream font-inter text-[#1a1a1a] overflow-x-hidden w-full max-w-full pt-16">
       <Navbar />
       <HeroBanner />
       <QRScanner />
