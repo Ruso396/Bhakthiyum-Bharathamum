@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { getParticipants, deleteParticipant, updatePaymentStatus, getUploadUrl } from '../services/api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Loader from '../components/Loader';
 import Toast from '../components/Toast';
 import type { Participant, ParticipantsResponse } from '../types';
@@ -14,6 +14,7 @@ interface Props {
 
 const Participants = ({ categoryFilter, paymentFilter, title = 'Participants' }: Props) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [data, setData] = useState<ParticipantsResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -24,17 +25,35 @@ const Participants = ({ categoryFilter, paymentFilter, title = 'Participants' }:
   const [filterDistrict, setFilterDistrict] = useState('');
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
+  const [searching, setSearching] = useState(false);
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const searchRef = useRef(search);
+  const filterCategoryRef = useRef(filterCategory);
+  const filterPaymentRef = useRef(filterPayment);
+  const filterDistrictRef = useRef(filterDistrict);
+  const dateFromRef = useRef(dateFrom);
+  const dateToRef = useRef(dateTo);
 
-  const fetchParticipants = async () => {
+  // Keep refs in sync
+  useEffect(() => { searchRef.current = search; }, [search]);
+  useEffect(() => { filterCategoryRef.current = filterCategory; }, [filterCategory]);
+  useEffect(() => { filterPaymentRef.current = filterPayment; }, [filterPayment]);
+  useEffect(() => { filterDistrictRef.current = filterDistrict; }, [filterDistrict]);
+  useEffect(() => { dateFromRef.current = dateFrom; }, [dateFrom]);
+  useEffect(() => { dateToRef.current = dateTo; }, [dateTo]);
+
+  const fetchParticipants = async (paramsOverride?: Record<string, string>) => {
     setLoading(true);
     try {
-      const params: Record<string, string> = {};
-      if (search) params.search = search;
-      if (filterCategory) params.category = filterCategory;
-      if (filterPayment) params.payment_status = filterPayment;
-      if (filterDistrict) params.district = filterDistrict;
-      if (dateFrom) params.date_from = dateFrom;
-      if (dateTo) params.date_to = dateTo;
+      const params: Record<string, string> = paramsOverride || {};
+      if (!paramsOverride) {
+        if (searchRef.current) params.search = searchRef.current;
+        if (filterCategoryRef.current) params.category = filterCategoryRef.current;
+        if (filterPaymentRef.current) params.payment_status = filterPaymentRef.current;
+        if (filterDistrictRef.current) params.district = filterDistrictRef.current;
+        if (dateFromRef.current) params.date_from = dateFromRef.current;
+        if (dateToRef.current) params.date_to = dateToRef.current;
+      }
 
       const response = await getParticipants(params);
       if (response.success) {
@@ -47,13 +66,34 @@ const Participants = ({ categoryFilter, paymentFilter, title = 'Participants' }:
     }
   };
 
+  // Sync props to state when route changes (fixes stale filter state on navigation)
   useEffect(() => {
-    fetchParticipants();
-  }, [filterCategory, filterPayment, filterDistrict, dateFrom, dateTo]);
+    setFilterCategory(categoryFilter || '');
+    setFilterPayment(paymentFilter || '');
+    setFilterDistrict('');
+    setDateFrom('');
+    setDateTo('');
+    setSearch('');
+  }, [categoryFilter, paymentFilter, location.pathname]);
 
-  const handleSearch = () => {
-    fetchParticipants();
-  };
+  // Debounced search effect - triggers on any filter change
+  useEffect(() => {
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+    setSearching(true);
+    debounceRef.current = setTimeout(() => {
+      fetchParticipants();
+      setSearching(false);
+    }, 400);
+
+    return () => {
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search, filterCategory, filterPayment, filterDistrict, dateFrom, dateTo]);
 
   const handleDelete = async (id: number) => {
     if (!window.confirm('Are you sure you want to delete this participant?')) return;
@@ -148,12 +188,14 @@ const Participants = ({ categoryFilter, paymentFilter, title = 'Participants' }:
               placeholder="Search name, reg no, phone..."
               className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-maroon-500"
             />
-            <button
-              onClick={handleSearch}
-              className="px-4 py-2 bg-maroon-700 text-white rounded-lg text-sm hover:bg-maroon-800 whitespace-nowrap"
-            >
-              Search
-            </button>
+            {searching && (
+              <div className="flex items-center px-3">
+                <svg className="animate-spin h-4 w-4 text-maroon-600" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                </svg>
+              </div>
+            )}
           </div>
           {!categoryFilter && (
             <select

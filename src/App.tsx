@@ -6,6 +6,7 @@ import Home from './pages/Home';
 // Admin Pages
 import Registration from './pages/Registration';
 import AdminLogin from './pages/AdminLogin';
+import ForgotPassword from './pages/ForgotPassword';
 import AdminLayout from './layouts/AdminLayout';
 import Dashboard from './pages/Dashboard';
 import Participants from './pages/Participants';
@@ -23,6 +24,7 @@ const App = () => {
 
         {/* Admin Login */}
         <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/forgot-password" element={<ForgotPassword />} />
 
         {/* Admin Panel */}
         <Route path="/admin" element={<AdminLayout />}>
