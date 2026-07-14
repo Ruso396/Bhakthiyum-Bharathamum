@@ -3,17 +3,15 @@ import React from 'react';
 
 const Perks: React.FC = () => {
   const perks = [
-    { icon: 'fa-certificate', label: 'உலக சாதனைச் சான்றிதழ்' },
+    { icon: 'fa-certificate', label: 'பதஞ்சலி புக் ஆஃப் வேர்ல்ட் ரெக்கார்ட்ஸ் சான்றிதழ்' },
     { icon: 'fa-award', label: 'தனிநபர் பாராட்டுச் சான்றிதழ்' },
     { icon: 'fa-medal', label: 'ஸ்ரீ ராஜேந்திர சோழன் நினைவுப் பதக்கம்' },
-    { icon: 'fa-photo-video', label: 'தொழில்முறை புகைப்படம் & காணொளி' },
-    { icon: 'fa-tshirt', label: 'நினைவு டி-ஷர்ட்' },
+    { icon: 'fa-photo-video', label: 'பதிவு கட்டணத்தைச் செலுத்தி, அதன் Payment Screenshot-ஐ பதிவேற்றிய பின்னரே உங்கள் பதிவு உறுதி செய்யப்படும்.' },
   ];
 
   return (
     <div id="perks" className="container-custom">
-      <div className="bg-gradient-to-br from-maroon to-maroon-dark text-white rounded-2xl md:rounded-3xl lg:rounded-[32px] p-6 md:p-8 lg:p-10 my-8 md:my-10 lg:my-12 shadow-[0_15px_44px_rgba(108,46,31,0.2)] border-2 border-gold">
-        <h3 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-center mb-4 md:mb-6 text-gold">
+<div className="bg-[#6c2e1f] text-white rounded-2xl md:rounded-3xl lg:rounded-[32px] p-6 md:p-8 lg:p-10 my-8 md:my-10 lg:my-12 shadow-[0_15px_44px_rgba(108,46,31,0.25)] border-2 border-gold">        <h3 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-center mb-4 md:mb-6 text-gold">
           <i className="fas fa-star text-gold mr-2" />
           கலந்துகொள்ளும் கலைஞர்களுக்கான சிறப்புகள்
         </h3>
