@@ -36,9 +36,7 @@ const QRScanner: React.FC = () => {
           to={REGISTRATION_URL}
           className="w-full lg:w-[340px] xl:w-[360px] flex-shrink-0 block group cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(212,175,55,0.35)]"
         >
-          <div className="bg-white rounded-3xl border border-gold/40 shadow-[0_12px_40px_rgba(212,175,55,0.2)] overflow-hidden">
-            
-            {/* Maroon Header with Leaf Icons */}
+<div className="bg-white rounded-3xl border border-gold/40 overflow-hidden shadow-none">            {/* Maroon Header with Leaf Icons */}
             <div className="bg-maroon px-4 md:px-6 py-3 md:py-4 flex items-center justify-center gap-3">
               <i className="fas fa-leaf text-gold text-sm md:text-base group-hover:scale-110 transition-transform duration-300"></i>
               <h3 className="text-white text-lg md:text-xl lg:text-2xl font-extrabold tracking-wide">
@@ -56,8 +54,7 @@ const QRScanner: React.FC = () => {
 
             {/* QR Code Container */}
             <div className="px-4 md:px-6 pb-3 md:pb-4 flex justify-center">
-              <div className="inline-block bg-white p-2.5 md:p-3 rounded-2xl border-[3px] border-gold shadow-[0_4px_16px_rgba(212,175,55,0.15)] group-hover:shadow-[0_8px_24px_rgba(212,175,55,0.3)] transition-all duration-300 group-hover:scale-[1.02]">
-                <canvas
+<div className="inline-block bg-white p-2.5 md:p-3 rounded-2xl border-[3px] border-gold shadow-[0_4px_16px_rgba(212,175,55,0.15)]">                <canvas
                   ref={canvasRef}
                   width={200}
                   height={200}
@@ -72,13 +69,18 @@ const QRScanner: React.FC = () => {
                 <div className="bg-gold/20 rounded-full p-2 flex-shrink-0 mt-0.5">
                   <i className="fas fa-info-circle text-gold text-sm group-hover:scale-110 transition-transform duration-300"></i>
                 </div>
-                <div className="text-xs md:text-sm text-gray-700 leading-relaxed">
-                  <span className="font-semibold text-maroon">{t('qr.scanToRegister')}</span>
-                  {' '}
-                  <span className="font-bold text-maroon underline decoration-gold decoration-2 underline-offset-2">
-                    {t('qr.registerFee')}
-                  </span>
-                </div>
+              <div className="text-xs md:text-sm text-gray-700 leading-relaxed">
+  <span className="font-semibold text-maroon">
+    {t('qr.scanToRegister')}
+  </span>{" "}
+  <span className="font-bold text-maroon underline decoration-gold decoration-2 underline-offset-2">
+    {t('qr.registerFee')}
+  </span>
+
+  <p className="mt-2 text-[11px] md:text-xs text-maroon font-semibold">
+    {t('qr.priorityNote')}
+  </p>
+</div>
               </div>
             </div>
           </div>
@@ -99,7 +101,7 @@ const QRScanner: React.FC = () => {
               {/* For Students */}
               <Link
                 to={REGISTRATION_URL}
-                className="block bg-gradient-to-r from-[#FFF8F0] to-[#FFF0EC] rounded-2xl p-4 md:p-5 lg:p-6 border border-gold/10 shadow-[0_2px_8px_rgba(212,175,55,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_8px_24px_rgba(212,175,55,0.15)] cursor-pointer group/card1"
+                className="block bg-gradient-to-r from-[#FFF8F0] to-[#FFF0EC] rounded-2xl p-4 md:p-5 lg:p-6 border border-gold/10  transition-all duration-300  cursor-pointer group/card1"
               >
                 <div className="flex items-start gap-3 md:gap-4">
                   <div className="bg-gold/20 rounded-full p-2.5 md:p-3 flex-shrink-0 group-hover/card1:bg-gold/30 transition-colors duration-300">

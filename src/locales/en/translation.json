@@ -22,7 +22,8 @@
   "feeLabel": "Registration Fee:",
   "registerFee": "₹1,500 per person",
   "registerNow": "Register Now",
-  "limitedSeats": "Limited to 1008 people only - Booking is mandatory!"
+  "limitedSeats": "Limited to 1008 people only - Booking is mandatory!",
+  "priorityNote": "Priority will be given to those who register first."
 },
   "video": {
     "eventPreview": "Event Preview",
