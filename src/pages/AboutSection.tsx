@@ -1,13 +1,11 @@
 import React from "react";
 import { useTranslation } from 'react-i18next';
-import About from "../assets/videoleft.png";
+import About from "../assets/certificate.jpeg";
 
 const VideoSection: React.FC = () => {
   const { t } = useTranslation();
 
-  const handleVideoClick = () => {
-    alert("📽️ விரைவில் காணொளி வெளியாகும்! Video coming soon!");
-  };
+ 
 
   return (
     <section id="video" className="pt-4 pb-12 md:pt-6 md:pb-16 lg:pt-8 lg:pb-20 bg-white">
@@ -25,23 +23,21 @@ const VideoSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
           {/* Left Image */}
-          <div
-            className="flex justify-center lg:justify-start cursor-pointer"
-            onClick={handleVideoClick}
-          >
+          <div className="flex justify-center lg:justify-start">
+          
             <img
               src={About}
               alt="Bhakthiyum – Bharathamum Event Preview"
-              className="
-                w-full
-                max-w-[520px]
-                h-auto
-                object-contain
-                bg-transparent
-                shadow-none
-                rounded-none
-                select-none
-              "
+             className="
+  w-full
+  max-w-[520px]
+  h-[380px]
+  object-contain
+  bg-transparent
+  shadow-none
+  rounded-none
+  select-none
+"
               draggable={false}
             />
           </div>
