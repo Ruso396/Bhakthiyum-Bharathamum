@@ -73,7 +73,7 @@ const QRScanner: React.FC = () => {
   <span className="font-semibold text-maroon">
     {t('qr.scanToRegister')}
   </span>{" "}
-  <span className="font-bold text-maroon underline decoration-gold decoration-2 underline-offset-2">
+  <span className="font-bold text-maroon ">
     {t('qr.registerFee')}
   </span>
 
