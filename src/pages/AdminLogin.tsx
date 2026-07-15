@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { loginAdmin } from '../services/api';
 import Toast from '../components/Toast';
-import registerImage from '../assets/register.webp';
+import registerImage from '../assets/adminleft.jpg';
 import { User, Lock } from 'lucide-react';
 
 const AdminLogin = () => {

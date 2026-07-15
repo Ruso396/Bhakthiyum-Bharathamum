@@ -7,8 +7,8 @@ const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: t('nav.eventPreview'), href: '#video', icon: 'fas fa-video' },
     { label: t('nav.register'), href: '#register', icon: 'fas fa-pen-alt' },
+    { label: t('nav.eventPreview'), href: '#video', icon: 'fas fa-video' },
     { label: t('nav.eventDetails'), href: '#details', icon: 'fas fa-info-circle' },
   ];
 
@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
               "
               aria-label="Toggle menu"
             >
-              {/* Hamburger Icon - shows when menu is closed */}
+              {/* Hamburger/Close Icon */}
               <span className={`
                 block w-5 h-0.5 bg-maroon absolute
                 transition-all duration-300 ease-in-out
@@ -79,8 +79,33 @@ const Navbar: React.FC = () => {
             </button>
           </div>
 
-          {/* Center - Brand/Logo (optional) */}
-          <div className="flex-1 text-center lg:text-left">
+          {/* Center - Navigation Links - Visible in Desktop, Hidden in Mobile */}
+          <div className="hidden lg:flex items-center justify-center flex-1 gap-1 md:gap-2 lg:gap-3">
+            {navLinks.map((link, index) => (
+              <a
+                key={index}
+                href={link.href}
+                onClick={(e) => handleClick(e, link.href)}
+                className="
+                  flex items-center gap-1.5 md:gap-2
+                  px-3 md:px-4 lg:px-5 py-2 md:py-2.5
+                  text-xs md:text-sm lg:text-base font-bold
+                  text-maroon
+                  rounded-full
+                  transition-all duration-300
+                  hover:bg-gold hover:text-white
+                  hover:-translate-y-0.5
+                  active:scale-95
+                "
+              >
+                <i className={`${link.icon} text-gold text-xs md:text-sm lg:text-base`}></i>
+                <span>{link.label}</span>
+              </a>
+            ))}
+          </div>
+
+          {/* Brand/Logo - Visible in Mobile */}
+          <div className="flex-1 text-center lg:hidden">
             <span className="text-maroon font-bold text-sm md:text-base">
               {/* Add your brand name or logo here */}
             </span>
@@ -93,7 +118,7 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Mobile Menu Panel - Opens when toggle is clicked - NO GAP */}
-        <div 
+        <div
           className={`
             lg:hidden
             absolute left-0 right-0
@@ -138,7 +163,7 @@ const Navbar: React.FC = () => {
 
       {/* Overlay to close menu when clicking outside */}
       {isMenuOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-40 bg-black/20 lg:hidden"
           onClick={() => setIsMenuOpen(false)}
         />
