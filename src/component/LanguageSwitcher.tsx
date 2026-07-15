@@ -4,30 +4,26 @@ import { useTranslation } from "react-i18next";
 const LanguageSwitcher: React.FC = () => {
   const { i18n } = useTranslation();
 
-  const languages = [
-    { code: "ta", label: "தமிழ்" },
-    { code: "en", label: "EN" },
-  ];
-
-  const currentIndex = languages.findIndex(
-    (lang) => lang.code === i18n.language
-  );
-
-  const currentLanguage =
-    currentIndex >= 0 ? languages[currentIndex] : languages[0];
+  const isTamil = i18n.language === "ta";
 
   const handleLanguageChange = () => {
-    const nextIndex = (currentIndex + 1) % languages.length;
-    i18n.changeLanguage(languages[nextIndex].code);
+    i18n.changeLanguage(isTamil ? "en" : "ta");
   };
 
   return (
-  <button
+   <button
   onClick={handleLanguageChange}
-  className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#D4AF37] text-white font-semibold transition"
+  className="flex items-center gap-2 px-4 py-2 rounded-full font-semibold transition-all duration-300 hover:opacity-90"
+  style={{ backgroundColor: "#6c2e1f" }}
 >
-  <i className="fas fa-globe"></i>
-  <span>{currentLanguage.label}</span>
+  <i
+    className="fas fa-globe"
+    style={{ color: "#ffff" }}
+  ></i>
+
+  <span style={{ color: "#ffff" }}>
+    {isTamil ? "EN" : "தமிழ்"}
+  </span>
 </button>
   );
 };
