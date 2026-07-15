@@ -6,8 +6,7 @@ const HeroBanner: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="relative w-full aspect-[16/9] sm:aspect-[16/7] md:aspect-[16/7] lg:aspect-[16/6.5] min-h-[200px] sm:min-h-[280px] md:min-h-[320px] lg:min-h-[420px] overflow-hidden bg-gradient-to-br from-[#2c1a12] to-[#4A1E14] border-b-4 border-gold">
-      {/* Background Image */}
+<section className="relative w-full aspect-[16/9] sm:aspect-[16/7] md:aspect-[16/7] lg:aspect-[16/5.8] xl:aspect-[16/5.5] min-h-[200px] sm:min-h-[280px] md:min-h-[320px] lg:min-h-[520px] xl:min-h-[580px] overflow-hidden bg-gradient-to-br from-[#2c1a12] to-[#4A1E14] border-b-4 border-gold">      {/* Background Image */}
       <img
         src={HomeBanner}
         alt="Bhakthiyum – Bharathamum 2026 Banner"
