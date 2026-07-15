@@ -87,6 +87,7 @@ const Navbar: React.FC = () => {
                 href={link.href}
                 onClick={(e) => handleClick(e, link.href)}
                 className="
+                  group
                   flex items-center gap-1.5 md:gap-2
                   px-3 md:px-4 lg:px-5 py-2 md:py-2.5
                   text-xs md:text-sm lg:text-base font-bold
@@ -98,7 +99,7 @@ const Navbar: React.FC = () => {
                   active:scale-95
                 "
               >
-                <i className={`${link.icon} text-gold text-xs md:text-sm lg:text-base`}></i>
+                <i className={`${link.icon} text-gold text-xs md:text-sm lg:text-base transition-colors duration-300 group-hover:text-[#6c2e1f]`}></i>
                 <span>{link.label}</span>
               </a>
             ))}
@@ -140,6 +141,7 @@ const Navbar: React.FC = () => {
                 href={link.href}
                 onClick={(e) => handleClick(e, link.href)}
                 className="
+                  group
                   flex items-center gap-3
                   w-full max-w-xs
                   px-6 py-3
@@ -153,7 +155,7 @@ const Navbar: React.FC = () => {
                   justify-center
                 "
               >
-                <i className={`${link.icon} text-gold text-base`}></i>
+                <i className={`${link.icon} text-gold text-base transition-colors duration-300 group-hover:text-[#6c2e1f]`}></i>
                 <span>{link.label}</span>
               </a>
             ))}
