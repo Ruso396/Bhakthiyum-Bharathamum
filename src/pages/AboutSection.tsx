@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from 'react-i18next';
-import AboutVideo from "../assets/barathamvideo.mp4";
+import About from "../assets/certificate.jpeg";
+
 const VideoSection: React.FC = () => {
   const { t } = useTranslation();
 
@@ -21,28 +22,25 @@ const VideoSection: React.FC = () => {
         {/* Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-        {/* Left Video */}
-<div className="flex justify-center lg:justify-start">
-  <video
-   
- className="
-  w-[320px]
-  md:w-[360px]
-  lg:w-[380px]
-  h-[460px]
-  object-cover
-  rounded-2xl
-  shadow-lg
-  border border-gold/20
+          {/* Left Image */}
+          <div className="flex justify-center lg:justify-start">
+          
+            <img
+              src={About}
+              alt="Bhakthiyum – Bharathamum Event Preview"
+             className="
+  w-full
+  max-w-[520px]
+  h-[380px]
+  object-contain
+  bg-transparent
+  shadow-none
+  rounded-none
+  select-none
 "
-  controls
-  playsInline
-  preload="metadata"
->
-    <source src={AboutVideo} type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-</div>
+              draggable={false}
+            />
+          </div>
 
           {/* Right Content */}
           <div className="text-center lg:text-left">

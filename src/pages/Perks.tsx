@@ -18,17 +18,41 @@ const Perks: React.FC = () => {
           <i className="fas fa-star text-gold mr-2" />
           {t('perks.title')}
         </h3>
-        <ul className="flex flex-wrap justify-center gap-2 md:gap-3 lg:gap-4 list-none">
-          {perks.map((perk, index) => (
-            <li
-              key={index}
-              className="bg-white/10 backdrop-blur-sm px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-3.5 rounded-full font-semibold text-xs md:text-sm lg:text-base border border-gold/30 transition-all duration-300 hover:bg-gold hover:text-maroon hover:scale-105"
-            >
-              <i className={`fas ${perk.icon} mr-1 md:mr-2`} />
-              {perk.label}
-            </li>
-          ))}
-        </ul>
+       <ul className="flex flex-col md:flex-row md:flex-wrap justify-center gap-3 list-none">
+  {perks.map((perk, index) => (
+    <li
+      key={index}
+      className="
+        w-full
+        md:w-auto
+        bg-white/10
+        backdrop-blur-sm
+        px-4
+        md:px-6
+        lg:px-8
+        py-3
+        rounded-xl
+        md:rounded-full
+        font-semibold
+        text-sm
+        md:text-sm
+        lg:text-base
+        border
+        border-gold/30
+        leading-5
+        transition-all
+        duration-300
+        hover:bg-gold
+        hover:text-maroon
+      "
+    >
+      <div className="flex items-start">
+        <i className={`fas ${perk.icon} mt-1 mr-2 flex-shrink-0`} />
+        <span>{perk.label}</span>
+      </div>
+    </li>
+  ))}
+</ul>
       </div>
     </div>
   );
