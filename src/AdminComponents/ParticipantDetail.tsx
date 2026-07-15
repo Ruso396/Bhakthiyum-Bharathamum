@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getParticipant, updatePaymentStatus, getUploadUrl } from '../services/api';
-import Loader from '../components/Loader';
-import Toast from '../components/Toast';
+import Loader from './Loader';
+import Toast from './Toast';
 import type { Participant } from '../types';
 
 const ParticipantDetail = () => {

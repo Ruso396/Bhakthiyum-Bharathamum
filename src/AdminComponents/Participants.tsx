@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
 import { getParticipants, deleteParticipant, updatePaymentStatus, getUploadUrl } from '../services/api';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Loader from '../components/Loader';
-import Toast from '../components/Toast';
+import Loader from './Loader';
+import Toast from './Toast';
 import type { Participant, ParticipantsResponse } from '../types';
 import { exportToExcel } from '../utils/exportToExcel';
 

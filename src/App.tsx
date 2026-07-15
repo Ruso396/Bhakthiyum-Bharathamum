@@ -5,12 +5,12 @@ import Home from './pages/Home';
 
 // Admin Pages
 import Registration from './pages/Registration';
-import AdminLogin from './pages/AdminLogin';
-import ForgotPassword from './pages/ForgotPassword';
-import AdminLayout from './layouts/AdminLayout';
-import Dashboard from './pages/Dashboard';
-import Participants from './pages/Participants';
-import ParticipantDetail from './pages/ParticipantDetail';
+import AdminLogin from './AdminComponents/AdminLogin';
+import ForgotPassword from './AdminComponents/ForgotPassword';
+import AdminLayout from './AdminComponents/layouts/AdminLayout';
+import Dashboard from './AdminComponents/Dashboard';
+import Participants from './AdminComponents/Participants';
+import ParticipantDetail from './AdminComponents/ParticipantDetail';
 
 const App = () => {
   return (

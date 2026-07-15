@@ -1,40 +1,33 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { forgotPassword } from '../services/api';
-import Toast from '../components/Toast';
+import { loginAdmin } from '../services/api';
+import Toast from './Toast';
 import registerImage from '../assets/adminleft.jpg';
 import { User, Lock } from 'lucide-react';
 
-const ForgotPassword = () => {
+const AdminLogin = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!username.trim() || !newPassword.trim() || !confirmPassword.trim()) {
-      setToast({ message: 'Please fill all fields', type: 'error' });
-      return;
-    }
-    if (newPassword.length < 6) {
-      setToast({ message: 'Password must be at least 6 characters', type: 'error' });
-      return;
-    }
-    if (newPassword !== confirmPassword) {
-      setToast({ message: 'Passwords do not match', type: 'error' });
+    if (!username.trim() || !password.trim()) {
+      setToast({ message: 'Please enter username and password', type: 'error' });
       return;
     }
 
     setLoading(true);
     try {
-      await forgotPassword(username, newPassword, confirmPassword);
-      setToast({ message: 'Password reset successful!', type: 'success' });
-      setTimeout(() => navigate('/admin/login'), 800);
+      const response = await loginAdmin(username, password);
+      localStorage.setItem('admin_token', response.data.token);
+      localStorage.setItem('admin_username', response.data.username);
+      setToast({ message: 'Login successful!', type: 'success' });
+      setTimeout(() => navigate('/admin/dashboard'), 500);
     } catch (err: any) {
-      const message = err.response?.data?.message || 'Password reset failed. Please try again.';
+      const message = err.response?.data?.message || 'Login failed. Please try again.';
       setToast({ message, type: 'error' });
     } finally {
       setLoading(false);
@@ -61,9 +54,9 @@ const ForgotPassword = () => {
         {/* Right Side: Form */}
         <div className="flex-1 p-5 sm:p-6 md:p-10">
           <div className="text-center mb-8">
-            <div className="text-5xl mb-4 md:hidden">🔑</div>
-            <h1 className="text-2xl font-bold text-maroon-800">Reset Password</h1>
-            <p className="text-gray-500 text-sm mt-1">Set a new admin password</p>
+            <div className="text-5xl mb-4 md:hidden">🪔</div>
+            <h1 className="text-2xl font-bold text-maroon-800">Admin Login</h1>
+            <p className="text-gray-500 text-sm mt-1">Bhakthiyum Bharathamum 2026</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -82,21 +75,10 @@ const ForgotPassword = () => {
               <div className={iconWrap}><Lock className="w-5 h-5" /></div>
               <input
                 type="password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                placeholder="Enter new password"
-                className={inputClass('newPassword')}
-              />
-            </div>
-
-            <div className="relative">
-              <div className={iconWrap}><Lock className="w-5 h-5" /></div>
-              <input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Confirm new password"
-                className={inputClass('confirmPassword')}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter password"
+                className={inputClass('password')}
               />
             </div>
 
@@ -108,16 +90,16 @@ const ForgotPassword = () => {
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
                   <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
-                  Resetting...
+                  Logging in...
                 </span>
               ) : (
-                'Reset Password'
+                'Login'
               )}
             </button>
 
-            <div className="text-center">
-              <Link to="/admin/login" className="text-sm text-maroon-700 hover:underline">
-                Back to Login
+            <div className="text-center mt-4">
+              <Link to="/admin/forgot-password" className="text-sm text-maroon-700 hover:underline">
+                Forgot Password?
               </Link>
             </div>
           </form>
@@ -127,4 +109,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default AdminLogin;

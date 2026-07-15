@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { registerParticipant } from '../services/api';
-import Toast from '../components/Toast';
+import Toast from '../AdminComponents/Toast';
 import type { FormErrors } from '../types';
 import qrCodeImage from '../assets/gpay-screenshot.jpg';
 import registerImage from '../assets/register.webp';

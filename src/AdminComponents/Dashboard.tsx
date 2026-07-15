@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getDashboardData } from '../services/api';
-import Loader from '../components/Loader';
+import Loader from './Loader';
 import type { DashboardData } from '../types';
 import { exportToExcel } from '../utils/exportToExcel';
 
