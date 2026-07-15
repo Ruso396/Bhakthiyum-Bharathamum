@@ -46,5 +46,19 @@
     "appreciation": "Individual Appreciation Certificate",
     "medal": "Sri Rajendra Cholan Memorial Medal",
     "paymentNote": "Your registration will be confirmed only after paying the registration fee and uploading the payment screenshot."
+  },
+"footer": {
+    "brand": "Bhakthiyum – Bharathamum",
+    "brandDescription": "With Patanjali Book of World Records recognition, a grand world record event to be held in 2026.",
+    "links": "Quick Links",
+    "eventDetails": "Event Details",
+    "gallery": "Gallery",
+    "perks": "Special Benefits",
+    "register": "Register",
+    "contact": "Contact",
+    "organization": "Sri Aadalvallan Natya Samrajyam",
+    "location": "Ariyalur, Tamil Nadu",
+    "copyright": "2026 · All Rights Reserved",
+    "worldRecord": "Patanjali Book of World Records ®"
   }
 }
