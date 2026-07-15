@@ -1,57 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 const Perks: React.FC = () => {
   const { t } = useTranslation();
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isFading, setIsFading] = useState(false);
 
-  // Totall-ah 4 points (including the payment/banner note info dynamically rolled)
+  // Only payment note remains
   const perks = [
     { 
-      icon: 'fa-certificate', 
-      label: t('perks.certificate'),
-      desc: 'Official world record certification from Patanjali Book of World Records'
-    },
-    { 
-      icon: 'fa-award', 
-      label: t('perks.appreciation'),
-      desc: 'Personalized appreciation certificate recognizing your contribution'
-    },
-    { 
-      icon: 'fa-medal', 
-      label: t('perks.medal'),
-      desc: 'Sri Rajendra Cholan Memorial Medal as a token of honor'
-    },
-    { 
       icon: 'fa-photo-video', 
-      label: t('perks.paymentNote'),
-      desc: t('qr.limitedSeats')
+      label: t('perks.paymentNote')
     },
   ];
-
-  const handleNext = () => {
-    if (isFading) return;
-    setIsFading(true);
-    setTimeout(() => {
-      setActiveIndex((prev) => (prev + 1) % perks.length);
-      setIsFading(false);
-    }, 300);
-  };
-
-  const handlePrev = () => {
-    if (isFading) return;
-    setIsFading(true);
-    setTimeout(() => {
-      setActiveIndex((prev) => (prev - 1 + perks.length) % perks.length);
-      setIsFading(false);
-    }, 300);
-  };
 
   return (
     <div id="perks" className="container-custom px-4 my-8 md:my-12">
       
-      {/* Premium Maroon Banner Layout containing all 4 Points natively */}
+      {/* Premium Maroon Banner Layout containing Payment Note */}
       <div className="
         relative
         bg-gradient-to-r
@@ -74,18 +38,9 @@ const Perks: React.FC = () => {
 
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
           
-          {/* Navigation Controls: Left Arrow */}
-          <button 
-            onClick={handlePrev}
-            className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-black/20 border border-gold/30 text-gold hover:bg-gold hover:text-maroon transition-all duration-300"
-            aria-label="Previous perk"
-          >
-            <i className="fas fa-chevron-left text-sm"></i>
-          </button>
-
-          {/* Active Sliding Point Block */}
-          <div className="flex-1 flex flex-col md:flex-row items-center gap-4 md:gap-6 text-center md:text-left w-full">
-            {/* Dynamic Shield Icon Visualizer */}
+          {/* Payment Note Block - Centered */}
+          <div className="flex-1 flex flex-col md:flex-row items-center gap-4 md:gap-6 text-center md:text-left w-full justify-center">
+            {/* Shield Icon Visualizer */}
             <div className={`
               w-14 h-14 md:w-16 md:h-16
               flex-shrink-0
@@ -97,54 +52,20 @@ const Perks: React.FC = () => {
               items-center
               justify-center
               shadow-[0_0_15px_rgba(212,175,55,0.2)]
-              transition-all duration-300 transform
-              ${isFading ? 'scale-75 opacity-0' : 'scale-100 opacity-100'}
             `}>
-              <i className={`fas ${perks[activeIndex].icon} text-gold text-xl md:text-2xl`}></i>
+              <i className={`fas ${perks[0].icon} text-gold text-xl md:text-2xl`}></i>
             </div>
 
-            {/* Fading Content Text */}
-            <div className={`flex-1 transition-all duration-300 ${isFading ? 'opacity-0 translate-x-4' : 'opacity-100 translate-x-0'}`}>
-              <div className="inline-block text-[10px] bg-gold/20 border border-gold/40 text-gold px-2 py-0.5 rounded font-black tracking-widest mb-1 uppercase">
-                Perk 0{activeIndex + 1} / 04
-              </div>
+            {/* Payment Note Content */}
+            <div className="flex-1">
               <h4 className="text-white font-extrabold text-lg md:text-xl lg:text-2xl tracking-wide mb-1">
-                {perks[activeIndex].label}
+                {perks[0].label}
               </h4>
-              <p className="text-gold/80 text-xs md:text-sm font-medium max-w-xl">
-                {perks[activeIndex].desc}
-              </p>
             </div>
           </div>
 
-          {/* Mobile Navigation Row & Action Call To Action Block */}
+          {/* Action Call To Action Block */}
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto mt-2 md:mt-0 justify-center md:justify-end">
-            
-            {/* Mobile-only Chevron Navigation Buttons */}
-            <div className="flex md:hidden gap-3 mb-2 sm:mb-0">
-              <button 
-                onClick={handlePrev} 
-                className="w-10 h-10 rounded-full bg-black/20 border border-gold/30 text-gold active:bg-gold active:text-maroon flex items-center justify-center"
-              >
-                <i className="fas fa-arrow-left"></i>
-              </button>
-              <button 
-                onClick={handleNext} 
-                className="w-10 h-10 rounded-full bg-black/20 border border-gold/30 text-gold active:bg-gold active:text-maroon flex items-center justify-center"
-              >
-                <i className="fas fa-arrow-right"></i>
-              </button>
-            </div>
-
-            {/* Desktop-only Right Arrow Control */}
-            <button 
-              onClick={handleNext}
-              className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-black/20 border border-gold/30 text-gold hover:bg-gold hover:text-maroon transition-all duration-300 mr-2"
-              aria-label="Next perk"
-            >
-              <i className="fas fa-chevron-right text-sm"></i>
-            </button>
-
             {/* Register Action Button */}
             <a
               href="#register"
@@ -177,14 +98,9 @@ const Perks: React.FC = () => {
 
         </div>
         
-        {/* Visual Line Indicators under the slider */}
+        {/* Visual Line Indicators - Only 1 dot now */}
         <div className="flex justify-center gap-1.5 mt-5 md:mt-6">
-          {perks.map((_, i) => (
-            <div 
-              key={i} 
-              className={`h-1.5 rounded-full transition-all duration-300 ${i === activeIndex ? 'w-6 bg-gold' : 'w-1.5 bg-white/20'}`}
-            />
-          ))}
+          <div className="h-1.5 w-6 rounded-full bg-gold" />
         </div>
 
       </div>
