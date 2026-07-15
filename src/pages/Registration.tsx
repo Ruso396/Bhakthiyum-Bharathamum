@@ -234,18 +234,18 @@ const Registration = () => {
                     <option value="Master">Master</option>
                     <option value="Student">Student</option>
                   </select>
-                  {errors.category && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.category}</p>}
                 </div>
+                {errors.category && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.category}</p>}
                 <div className="relative">
                   <div className={iconWrap}><User className="w-5 h-5" /></div>
                   <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Full Name" className={inputClass('name')} />
-                  {errors.name && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.name}</p>}
                 </div>
+                {errors.name && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.name}</p>}
                 <div className="relative">
                   <div className={iconWrap}><User className="w-5 h-5" /></div>
                   <input type="text" name="father_name" value={formData.father_name} onChange={handleChange} placeholder="Father's Name" className={inputClass('father_name')} />
-                  {errors.father_name && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.father_name}</p>}
                 </div>
+                {errors.father_name && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.father_name}</p>}
               </div>
             )}
 
@@ -255,33 +255,33 @@ const Registration = () => {
                   <div className="relative">
                     <div className={iconWrap}><Phone className="w-5 h-5" /></div>
                     <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone Number" maxLength={10} className={inputClass('phone')} />
-                    {errors.phone && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.phone}</p>}
                   </div>
+                  {errors.phone && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.phone}</p>}
                   <div className="relative">
                     <div className={iconWrap}><Hash className="w-5 h-5" /></div>
                     <input type="text" name="age" value={formData.age} onChange={handleChange} placeholder="Age" className={inputClass('age')} />
-                    {errors.age && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.age}</p>}
                   </div>
+                  {errors.age && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.age}</p>}
                 </div>
                 <div className="relative">
                   <div className="absolute left-3.5 top-3.5 text-gray-400 pointer-events-none"><MapPin className="w-5 h-5" /></div>
                   <textarea name="address" value={formData.address} onChange={handleChange} rows={3} placeholder="Complete Address" className={textareaClass('address')} />
-                  {errors.address && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.address}</p>}
                 </div>
+                {errors.address && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.address}</p>}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="relative">
                     <div className={iconWrap}><Building2 className="w-5 h-5" /></div>
                     <input type="text" name="district" value={formData.district} onChange={handleChange} placeholder="District" className={inputClass('district')} />
-                    {errors.district && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.district}</p>}
                   </div>
+                  {errors.district && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.district}</p>}
                   <div className="relative">
                     <div className={iconWrap}><Landmark className="w-5 h-5" /></div>
                     <select name="state" value={formData.state} onChange={handleChange} className={selectClass('state')}>
                       <option value="">Select State</option>
                       {indianStates.map((st) => <option key={st} value={st}>{st}</option>)}
                     </select>
-                    {errors.state && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.state}</p>}
                   </div>
+                  {errors.state && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.state}</p>}
                 </div>
               </div>
             )}
@@ -291,8 +291,8 @@ const Registration = () => {
                 <div className="relative">
                   <div className={iconWrap}><Wallet className="w-5 h-5" /></div>
                   <input type="text" name="upi_id" value={formData.upi_id} onChange={handleChange} placeholder="UPI ID (e.g. example@paytm)" className={inputClass('upi_id')} />
-                  {errors.upi_id && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.upi_id}</p>}
                 </div>
+                {errors.upi_id && <p className={errCss}><AlertCircle className="w-3.5 h-3.5" />{errors.upi_id}</p>}
                 <div>
                   <p className="text-sm font-medium text-gray-700 mb-2">Scan QR Code to Pay</p>
                   <div className="rounded-2xl border-2 border-gray-200 p-3 bg-white flex flex-col items-center">
