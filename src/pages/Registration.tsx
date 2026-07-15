@@ -4,7 +4,7 @@ import Toast from '../AdminComponents/Toast';
 import type { FormErrors } from '../types';
 import qrCodeImage from '../assets/gpay-screenshot.jpg';
 import registerImage from '../assets/register.webp';
-import { User, MapPin, CreditCard, CheckCircle, ChevronRight, ChevronLeft, X, AlertCircle, Phone, Hash, Building2, Landmark, Wallet, Image, Sparkles, PartyPopper, Trophy } from 'lucide-react';
+import { User, MapPin, CreditCard, CheckCircle, ChevronRight, ChevronLeft, X, AlertCircle, Phone, Hash, Building2, Landmark, Wallet, Image } from 'lucide-react';
 
 const indianStates = [
   'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh',
@@ -136,50 +136,22 @@ const Registration = () => {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-maroon-950 via-maroon-900 to-[#1a0a0a] flex items-center justify-center p-4 relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-80 h-80 bg-maroon-600/10 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-400/5 rounded-full blur-3xl" />
-        </div>
-        <div className="relative w-full max-w-lg animate-[fadeUp_0.6s_ease-out]">
-          <div className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 md:p-10 border border-white/10 shadow-2xl">
-            <div className="flex justify-center mb-6">
-              <div className="relative">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center shadow-lg shadow-green-500/20">
-                  <CheckCircle className="w-14 h-14 text-white" strokeWidth={1.5} />
-                </div>
-                <div className="absolute -top-1 -right-1">
-                  <PartyPopper className="w-8 h-8 text-amber-400 animate-bounce" />
-                </div>
-              </div>
-            </div>
-            <div className="text-center mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">Registration Successful!</h2>
-              <p className="text-amber-200/80">Thank you for registering</p>
-            </div>
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 to-amber-600 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-300" />
-              <div className="relative bg-gradient-to-br from-maroon-950 to-maroon-900 rounded-2xl p-6 border border-amber-500/20 text-center">
-                <p className="text-amber-300/70 text-sm mb-2 tracking-widest uppercase">Registration Number</p>
-                <div className="flex items-center justify-center gap-3">
-                  <Trophy className="w-6 h-6 text-amber-400" />
-                  <h3 className="text-3xl md:text-4xl font-bold tracking-[0.2em] text-amber-300">{regNumber}</h3>
-                </div>
-                <div className="mt-4 h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
-                <p className="text-gray-400 text-xs mt-4">Please save this number for future reference</p>
-              </div>
-            </div>
-            <div className="flex justify-center gap-2 my-6">
-              {[...Array(5)].map((_, i) => <div key={i} className="w-2 h-2 rounded-full bg-amber-500/40 animate-pulse" style={{ animationDelay: `${i * 0.2}s` }} />)}
-            </div>
-            <button onClick={() => window.location.reload()} className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-maroon-950 font-bold py-4 px-6 rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg shadow-amber-500/20">
-              <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-              Register Another Participant
-            </button>
+      <div className="min-h-screen bg-gradient-to-br from-maroon-50 via-white to-amber-50 flex items-center justify-center p-4">
+        {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+        <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 p-8 text-center">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
+            <CheckCircle className="w-9 h-9 text-green-600" strokeWidth={2} />
           </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-1">Registration Successful</h2>
+          <p className="text-sm text-gray-500 mb-5">Thank you for registering. Please save your registration number below.</p>
+          <div className="bg-gray-50 rounded-xl p-4 mb-6 border border-gray-100">
+            <p className="text-xs text-gray-500 mb-1 uppercase tracking-wide">Registration Number</p>
+            <p className="text-2xl font-bold text-maroon-700 tracking-widest">{regNumber}</p>
+          </div>
+          <button onClick={() => window.location.reload()} className="w-full bg-gradient-to-r from-maroon-700 to-maroon-800 text-white font-semibold py-3 rounded-xl hover:from-maroon-800 hover:to-maroon-900 transition-all shadow-md">
+            Register Another Participant
+          </button>
         </div>
-        <style>{`@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}`}</style>
       </div>
     );
   }
